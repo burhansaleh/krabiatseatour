@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krabi @ Sea Tour - Best Island Tours in Krabi</title>
+    <!-- Tailwind CSS (for fast, responsive styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom tweaks for smooth interactions */
+        .hero-slide {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .tour-card:hover .tour-image {
+            transform: scale(1.05);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .accordion-content.active {
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+
+    <!-- 1. Sticky Navbar (Trust + Utility) -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <img src="/krabiseatour/assets/img/logo_kst.png" alt="Krabi @ Sea Tour Logo" class="w-12 h-12 rounded-full">
+                <span class="text-xl font-bold text-blue-800">Krabi @ Sea Tour</span>
+            </div>
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex gap-6 text-gray-700">
+                <a href="#tours" class="hover:text-blue-600">Tours</a>
+                <a href="#why-us" class="hover:text-blue-600">Why Us</a>
+                <a href="#reviews" class="hover:text-blue-600">Reviews</a>
+                <a href="#faq" class="hover:text-blue-600">FAQ</a>
+            </div>
+            <!-- Language + Currency + CTA -->
+            <div class="hidden md:flex items-center gap-4">
+                <select class="border rounded px-2 py-1 text-sm">
+                    <option>English</option>
+                    <option>Thai</option>
+                    <option>Chinese</option>
+                </select>
+                <select class="border rounded px-2 py-1 text-sm">
+                    <option>THB</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+                <button class="bg-coral-500 text-white px-4 py-2 rounded-lg hover:bg-coral-600 transition" style="background-color: #FF7F50;">
+                    Book Now
+                </button>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded border border-gray-200 text-blue-800 hover:bg-blue-50 transition" type="button" aria-label="Open navigation menu" aria-controls="mobile-menu" aria-expanded="false">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 pb-4">
+            <div class="flex flex-col gap-3 py-4 text-gray-700">
+                <a href="#tours" class="py-2 hover:text-blue-600">Tours</a>
+                <a href="#why-us" class="py-2 hover:text-blue-600">Why Us</a>
+                <a href="#reviews" class="py-2 hover:text-blue-600">Reviews</a>
+                <a href="#faq" class="py-2 hover:text-blue-600">FAQ</a>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <select class="border rounded px-2 py-2 text-sm">
+                    <option>English</option>
+                    <option>Thai</option>
+                    <option>Chinese</option>
+                </select>
+                <select class="border rounded px-2 py-2 text-sm">
+                    <option>THB</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+                <button class="col-span-2 bg-coral-500 text-white px-4 py-2 rounded-lg hover:bg-coral-600 transition" style="background-color: #FF7F50;">
+                    Book Now
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. Hero Section (3-Second Attention Grab) -->
+    <section class="relative h-[80vh] md:h-[90vh] overflow-hidden">
+        <!-- Background Image Slides -->
+        <div class="absolute inset-0">
+            <img src="/krabiseatour/assets/img/slides/S__6381748_0.jpg" alt="Krabi beach tour" class="hero-slide active absolute inset-0">
+            <img src="/krabiseatour/assets/img/slides/S__6381753_0.jpg" alt="Krabi island cliffs" class="hero-slide absolute inset-0">
+            <img src="/krabiseatour/assets/img/slides/S__6381737_0.jpg" alt="Snorkeling in clear tropical water" class="hero-slide absolute inset-0">
+            <img src="/krabiseatour/assets/img/slides/S__6381739_0.jpg" alt="Krabi beach tour" class="hero-slide active absolute inset-0">
+            <img src="/krabiseatour/assets/img/slides/576966_0.jpg" alt="Krabi island cliffs" class="hero-slide absolute inset-0">
+            <img src="/krabiseatour/assets/img/slides/S__6381759_0.jpg" alt="Snorkeling in clear tropical water" class="hero-slide absolute inset-0">            
+        </div>
+        <!-- Dark Overlay for Text Readability -->
+        <div class="absolute inset-0 bg-black/40"></div>
+        <!-- Hero Content -->
+        <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+            <!-- Trust Banner -->
+            <div class="mb-4 bg-blue-800/80 px-4 py-2 rounded-full text-sm">
+                <i class="fas fa-check-circle mr-2"></i>Licensed Operator | 4.9/5 Stars | No Hidden Fees
+            </div>
+            <!-- Headline -->
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Krabi’s Most Loved Island Tours</h1>
+            <!-- Subhead -->
+            <p class="text-lg md:text-2xl mb-8 max-w-2xl">
+                All-Inclusive Day Trips, Sunset BBQs & Magical Night Plankton Swims
+            </p>
+            <!-- CTAs -->
+            <div class="flex flex-col md:flex-row gap-4">
+                <a href="#tours" class="bg-coral-500 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-coral-600 transition" style="background-color: #FF7F50;">
+                    Browse Top Tours
+                </a>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-white hover:text-gray-800 transition">
+                    Check Live Availability
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Featured Tours Section (Core Products) -->
+    <section id="tours" class="max-w-7xl mx-auto px-4 py-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Signature Experiences</h2>
+        
+        <!-- Tour 1: 4 Islands Day Tour -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="tour-card rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="4 Islands Tour" class="tour-image w-full h-64 object-cover transition duration-300">
+            </div>
+            <div class="flex flex-col justify-center">
+                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm w-fit mb-3">Most Popular</span>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">4 Islands Day Tour by Longtail Boat</h3>
+                <p class="text-gray-600 mb-4">Snorkel at Chicken Island, relax on Tub Island’s sandbar, and enjoy a Halal buffet lunch on Poda Island.</p>
+                <ul class="text-gray-700 mb-6 space-y-2">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Free Hotel Pickup</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Halal Buffet Lunch</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Snorkel Gear Included</li>
+                </ul>
+                <div class="flex items-center justify-between">
+                    <p class="text-2xl font-bold text-blue-800">1,500 THB <span class="text-sm font-normal text-gray-500">/ Adult</span></p>
+                    <button class="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition">
+                        View Itinerary
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tour 2: 7 Islands Sunset Tour -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="flex flex-col justify-center order-2 md:order-1">
+                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm w-fit mb-3">Best Sunset</span>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">7 Islands Sunset BBQ & Plankton Tour</h3>
+                <p class="text-gray-600 mb-4">Watch the sunset, enjoy a beach BBQ, and swim with magical bioluminescent plankton at night.</p>
+                <ul class="text-gray-700 mb-6 space-y-2">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Sunset Viewing</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>BBQ Dinner (Halal)</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i>Night Plankton Swim</li>
+                </ul>
+                <div class="flex items-center justify-between">
+                    <p class="text-2xl font-bold text-blue-800">2,000 THB <span class="text-sm font-normal text-gray-500">/ Adult</span></p>
+                    <button class="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition">
+                        View Itinerary
+                    </button>
+                </div>
+            </div>
+            <div class="tour-card rounded-2xl overflow-hidden shadow-lg cursor-pointer order-1 md:order-2">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800" alt="7 Islands Sunset Tour" class="tour-image w-full h-64 object-cover transition duration-300">
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Why Choose Us (Trust Building) -->
+    <section id="why-us" class="bg-blue-50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Why Book With Us?</h2>
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Benefit 1 -->
+                <div class="text-center">
+                    <div class="bg-blue-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-van-shuttle text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Free Hotel Pickup</h3>
+                    <p class="text-gray-600">Door-to-door service across Krabi Town, Ao Nang & Khlong Muang</p>
+                </div>
+                <!-- Benefit 2 -->
+                <div class="text-center">
+                    <div class="bg-blue-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-utensils text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Halal Meals Included</h3>
+                    <p class="text-gray-600">Buffet lunch/BBQ, fresh fruit & drinks on every tour</p>
+                </div>
+                <!-- Benefit 3 -->
+                <div class="text-center">
+                    <div class="bg-blue-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <img src="assets/icons/snorkeling.png" alt="Scuba Icon" class="w-8 h-8 filter invert">
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Full Gear Provided</h3>
+                    <p class="text-gray-600">No need to bring your own snorkeling equipment</p>
+                </div>
+                <!-- Benefit 4 -->
+                <div class="text-center">
+                    <div class="bg-blue-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Licensed & Insured</h3>
+                    <p class="text-gray-600">Fully certified operator with comprehensive travel insurance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Social Proof (Traveler Reviews) -->
+    <section id="reviews" class="max-w-7xl mx-auto px-4 py-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">What Our Travelers Say</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Review 1 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="/krabiseatour/assets/icons/woman.png" alt="Traveler" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-bold text-gray-800">Sarah M.</p>
+                        <div class="text-yellow-500">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600">"The 7 islands tour was the highlight of our trip! The plankton swim was magical, and the BBQ dinner was delicious. Highly recommend!"</p>
+            </div>
+            <!-- Review 2 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="/krabiseatour/assets/icons/man (1).png" alt="Traveler" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-bold text-gray-800">Ahmed K.</p>
+                        <div class="text-yellow-500">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600">"Great to have Halal food options! The 4 islands tour was perfect for our family, and the guide was super friendly."</p>
+            </div>
+            <!-- Review 3 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="/krabiseatour/assets/icons/woman (1).png" alt="Traveler" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-bold text-gray-800">Lisa T.</p>
+                        <div class="text-yellow-500">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600">"Free pickup from our hotel was so convenient! The snorkeling spots were beautiful, and everything was well-organized."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Tour Finder Quiz (Interactive Engagement) -->
+    <section class="bg-coral-50 py-16" style="background-color: #FFF5F0;">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Find Your Perfect Tour</h2>
+            <p class="text-gray-600 mb-8">Answer 2 quick questions to get a personalized recommendation!</p>
+            
+            <!-- Quiz Container -->
+            <div id="quiz-container" class="bg-white rounded-2xl shadow-lg p-8">
+                <!-- Question 1 -->
+                <div id="question-1" class="quiz-step">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">What kind of experience are you looking for?</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <button class="quiz-option border-2 border-gray-200 rounded-lg p-4 hover:border-blue-800 transition" data-answer="day">
+                            <i class="fas fa-sun text-2xl text-yellow-500 mb-2"></i>
+                            <p class="font-semibold">Relaxing Day Trip</p>
+                        </button>
+                        <button class="quiz-option border-2 border-gray-200 rounded-lg p-4 hover:border-blue-800 transition" data-answer="sunset">
+                            <i class="fas fa-moon text-2xl text-orange-500 mb-2"></i>
+                            <p class="font-semibold">Sunset & Night Adventure</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div id="question-2" class="quiz-step hidden">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Who are you traveling with?</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <button class="quiz-option border-2 border-gray-200 rounded-lg p-4 hover:border-blue-800 transition" data-traveler="family">
+                            <i class="fas fa-family text-2xl text-blue-500 mb-2"></i>
+                            <p class="font-semibold">Family (with kids)</p>
+                        </button>
+                        <button class="quiz-option border-2 border-gray-200 rounded-lg p-4 hover:border-blue-800 transition" data-traveler="couple">
+                            <i class="fas fa-heart text-2xl text-pink-500 mb-2"></i>
+                            <p class="font-semibold">Couple / Solo</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result -->
+                <div id="quiz-result" class="quiz-step hidden">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">We Recommend:</h3>
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <h4 id="recommended-tour" class="text-2xl font-bold text-blue-800 mb-2">4 Islands Day Tour</h4>
+                        <p id="recommended-desc" class="text-gray-600 mb-4">Perfect for a relaxing day with family!</p>
+                        <button class="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition">
+                            Book This Tour
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Promotion Banner (Urgency) -->
+    <section class="bg-blue-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-white">
+            <h2 class="text-2xl md:text-3xl font-bold mb-2">Early Bird Discount!</h2>
+            <p class="mb-4">Book 7+ Days In Advance & Save 10% On All Tours</p>
+            <button class="bg-white text-blue-800 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                Grab My Discount
+            </button>
+        </div>
+    </section>
+
+    <!-- 8. FAQ Section (Eliminate Friction) -->
+    <section id="faq" class="max-w-4xl mx-auto px-4 py-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+            <!-- FAQ 1 -->
+            <div class="bg-white rounded-lg shadow-md">
+                <button class="accordion-btn w-full px-6 py-4 text-left flex justify-between items-center font-semibold text-gray-800">
+                    What's included in the tour price?
+                    <i class="fas fa-chevron-down transition"></i>
+                </button>
+                <div class="accordion-content px-6 pb-4">
+                    <p class="text-gray-600">All tours include hotel pickup/drop-off, snorkeling gear, meals (Halal), drinking water, insurance, and an English-speaking guide.</p>
+                </div>
+            </div>
+            <!-- FAQ 2 -->
+            <div class="bg-white rounded-lg shadow-md">
+                <button class="accordion-btn w-full px-6 py-4 text-left flex justify-between items-center font-semibold text-gray-800">
+                    Do you pick up from my hotel?
+                    <i class="fas fa-chevron-down transition"></i>
+                </button>
+                <div class="accordion-content px-6 pb-4">
+                    <p class="text-gray-600">Yes! We offer free pickup from all hotels in Krabi Town, Ao Nang, Khlong Muang, and Nopparat Thara Beach.</p>
+                </div>
+            </div>
+            <!-- FAQ 3 -->
+            <div class="bg-white rounded-lg shadow-md">
+                <button class="accordion-btn w-full px-6 py-4 text-left flex justify-between items-center font-semibold text-gray-800">
+                    What happens if it rains?
+                    <i class="fas fa-chevron-down transition"></i>
+                </button>
+                <div class="accordion-content px-6 pb-4">
+                    <p class="text-gray-600">If the tour is canceled due to bad weather, we’ll offer a full refund or reschedule your tour for another day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Footer (Trust + Navigation) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Krabi @ Sea Tour</h3>
+                    <p class="text-gray-400 mb-2">DTD License No. 33/10558</p>
+                    <p class="text-gray-400 mb-4">Your trusted local tour operator in Krabi.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook text-2xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-2xl"></i></a>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#tours" class="hover:text-white">Tours</a></li>
+                        <li><a href="#why-us" class="hover:text-white">Why Us</a></li>
+                        <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white">Cancellation Policy</a></li>
+                    </ul>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i>062 298 3850</li>
+                        <li><i class="fab fa-whatsapp mr-2"></i>099 289 6910</li>
+                        <li><i class="fas fa-envelope mr-2"></i>info@krabiseatour.com</li>
+                    </ul>
+                </div>
+                <!-- Payment Methods -->
+                <div>
+                    <h4 class="font-bold mb-4">Accepted Payments</h4>
+                    <div class="flex gap-2">
+                    
+                        <img src="/krabiseatour/assets/icons/visa.png" alt="Visa" class="h-8">
+                        <img src="/krabiseatour/assets/icons/mastercard.png" alt="Mastercard" class="h-8">
+                        <img src="/krabiseatour/assets/icons/unionpay.png" alt="UnionPay" class="h-8">
+                        <img src="/krabiseatour/assets/icons/paypal.png" alt="PayPal" class="h-8">
+                        <img src="/krabiseatour/assets/icons/wechat.png" alt="WeChatPay" class="h-8">                        
+                        <img src="/krabiseatour/assets/icons/alipay.png" alt="Alipay" class="h-8">
+                    
+                    <!-- <div>
+                        <img src="/krabiseatour/assets/icons/wechat.png" alt="Visa" class="h-8">
+                        <img src="/krabiseatour/assets/icons/alipay-icon-logo.png" alt="Mastercard" class="h-8">
+                        <img src="/krabiseatour/assets/icons/paypal.png" alt="PayPal" class="h-8">
+                    </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 Krabi @ Sea Tour. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // 1. Hero image slideshow
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        let activeHeroSlide = 0;
+
+        setInterval(() => {
+            heroSlides[activeHeroSlide].classList.remove('active');
+            activeHeroSlide = (activeHeroSlide + 1) % heroSlides.length;
+            heroSlides[activeHeroSlide].classList.add('active');
+        }, 4000);
+
+        // 1. Mobile navigation
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', String(!isOpen));
+            mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars', isOpen);
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-xmark', !isOpen);
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.setAttribute('aria-label', 'Open navigation menu');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-xmark');
+            });
+        });
+
+        // 1. FAQ Accordion
+        const accordionBtns = document.querySelectorAll('.accordion-btn');
+        accordionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                content.classList.toggle('active');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // 2. Tour Finder Quiz
+        const quizSteps = document.querySelectorAll('.quiz-step');
+        const quizOptions = document.querySelectorAll('.quiz-option');
+        let currentStep = 0;
+        let tourType = '';
+        let travelerType = '';
+
+        quizOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Save answer
+                if (currentStep === 0) {
+                    tourType = option.dataset.answer;
+                } else if (currentStep === 1) {
+                    travelerType = option.dataset.traveler;
+                    // Show result
+                    showResult();
+                    return;
+                }
+                // Next step
+                quizSteps[currentStep].classList.add('hidden');
+                currentStep++;
+                quizSteps[currentStep].classList.remove('hidden');
+            });
+        });
+
+        function showResult() {
+            const recommendedTour = document.getElementById('recommended-tour');
+            const recommendedDesc = document.getElementById('recommended-desc');
+            
+            if (tourType === 'day' && travelerType === 'family') {
+                recommendedTour.textContent = '4 Islands Day Tour';
+                recommendedDesc.textContent = 'Perfect for a relaxing day with family – calm waters and kid-friendly stops!';
+            } else if (tourType === 'sunset') {
+                recommendedTour.textContent = '7 Islands Sunset BBQ & Plankton Tour';
+                recommendedDesc.textContent = 'Romantic and magical – ideal for couples or solo adventurers!';
+            } else {
+                recommendedTour.textContent = '4 Islands Day Tour';
+                recommendedDesc.textContent = 'Our classic tour – great for first-time visitors to Krabi!';
+            }
+            
+            quizSteps[currentStep].classList.add('hidden');
+            currentStep++;
+            quizSteps[currentStep].classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
